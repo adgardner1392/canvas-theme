@@ -1,0 +1,20 @@
+// Import our variables
+@import "/setup/*.scss";
+
+// Import our utilities
+@import "utilities/*.scss";
+
+// Import the element styles
+@import "/elements/*.scss";
+
+// Import our block styles
+@import "../../../templates/blocks/**/*.scss";
+
+// Anything general and theme related
+@import "theme/*.scss";
+
+// Overrides for the elements/*.scss files
+@import "component-overrides/*.scss";
+
+// Load animation styles only on the front end of the website
+@import "node_modules/aos/dist/aos";

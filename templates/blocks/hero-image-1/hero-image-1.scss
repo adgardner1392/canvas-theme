@@ -1,0 +1,214 @@
+// Hero Image 1 Block
+.hero-image-1 {
+    position: relative;
+    max-width: 100%;
+    height: 100vh;
+    background-color: rgba( $primary-color, 1 );
+    color: $white;
+    padding-top: 130px;
+    overflow: hidden;
+}
+
+.hero-image-1__img {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
+
+// Hero Image white content modifier
+.hero-image-1--white {
+    color: $white;
+}
+
+// Hero image container, setting full height for vertical alignment
+.hero-image-1__container {
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+// Wrapper around the content
+.hero-image-1__wrap {
+    position: relative;
+    vertical-align: middle;
+    z-index: 3;
+    margin-bottom: 20px;
+}
+
+// Left Wrap
+.hero-image-1__wrap--left {
+    height: 100%;
+    max-height: 440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+// Right Wrap
+.hero-image-1__wrap--right {
+    background: linear-gradient(150.74deg, #4ADEDE 7.3%, #7A07DC 72.15%);
+    width: 100%;
+    max-width: 350px;
+    height: 100%;
+    max-height: 440px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+// Heading class
+.hero-image-1__heading {
+    text-transform: uppercase;
+}
+
+
+.hero-image-1__content {
+    max-width: 800px;
+    display: flex;
+    justify-content: space-between;
+    @include font-size( $h6-font-sizes );
+    flex-direction: column;
+}
+
+.hero-image-1__content--showcase {
+    justify-content: center;
+    color: rgba(1, 3, 60, 1);
+    font-family: $additional-font;
+    @include font-size( $content-font-size-md );
+    flex-direction: column;
+    height: 100%;
+
+    .heading {
+        height: 105px;
+        width: 100%;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 3px dashed rgba(14, 54, 128, 0.2);
+
+        &:before {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: -15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba( $primary-color , 0.8);
+            z-index:-1;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba( $primary-color , 0.8);
+            z-index:-1;
+        }
+    }
+
+    .pricing {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        @include font-size( $content-font-size-sm );
+        color: rgba($white, 0.66);
+        align-items: center;
+        height: 100%;
+        justify-content: space-evenly;
+    }
+
+    .price {
+        color: $white;
+        font-family: $heading-font;
+        @include font-size( $uber-font-sizes );
+
+        span {
+            @include font-size( $h2-font-sizes );
+        }
+    }
+
+
+}
+
+.hero-image-1__content--main {
+    color: rgba( $white, 0.75 );
+}
+
+.hero-image-1__date,
+.hero-image-1__location {
+    display: flex;
+    align-items: center;
+    @include font-size( $content-font-size-md );
+    font-family: $additional-font;
+}
+
+
+.hero-image-1__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient( 180deg, rgba( #2100FF, 0.33 ) 0%, rgba( #5501D2, 0.33 ) 100% );
+    border-radius: 50%;
+    margin-right: 12px;
+
+    svg {
+        width: 50%;
+    }
+
+}
+
+.hero-image-1__icon--heading {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient( 180deg, #7B08DC 0%, #4ADEDF 135% );
+}
+
+// Responsive code
+@include above(sm) {
+
+    .hero-image-1 {
+        padding-top: 0;
+    }
+
+    .hero-image-1__container {
+        flex-direction: row;
+    }
+
+    .hero-image-1__wrap {
+        margin-bottom: 0;
+    }
+
+    .hero-image-1__icon {
+        width: 50px;
+        height: 50px;
+
+        svg {
+            width: 100%;
+        }
+    }
+
+    .hero-image-1__content {
+        flex-direction: row;
+    }
+
+    .hero-image-1__content--showcase {
+        flex-direction: column;
+    }
+
+    .hero-image-1__icon--heading {
+        width: 60px;
+        height: 60px;
+    }
+}

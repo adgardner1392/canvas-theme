@@ -1,0 +1,283 @@
+@mixin above($breakpoint) {
+
+  // If the breakpoint exists in the map.
+  @if map-has-key($grid-breakpoints, $breakpoint) {
+
+    // Get the breakpoint value.
+    $breakpoint-value: map-get($grid-breakpoints, $breakpoint);
+
+    // Write the media query.
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+
+  // If the breakpoint doesn't exist in the map.
+  } @else {
+
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+@mixin below($breakpoint) {
+
+  // If the breakpoint exists in the map.
+  @if map-has-key($grid-breakpoints, $breakpoint) {
+
+    // Get the breakpoint value.
+    $breakpoint-value: map-get($grid-breakpoints, $breakpoint);
+
+    // Write the media query.
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+
+  // If the breakpoint doesn't exist in the map.
+  } @else {
+
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+
+@mixin between($lower, $upper) {
+
+  // If both the lower and upper grid-breakpoints exist in the map.
+  @if map-has-key($grid-breakpoints, $lower) and map-has-key($grid-breakpoints, $upper) {
+
+    // Get the lower and upper grid-breakpoints.
+    $lower-breakpoint: map-get($grid-breakpoints, $lower);
+    $upper-breakpoint: map-get($grid-breakpoints, $upper);
+
+    // Write the media query.
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+
+  // If one or both of the grid-breakpoints don't exist.
+  } @else {
+
+    // If lower breakpoint is invalid.
+    @if (map-has-key($grid-breakpoints, $lower) == false) {
+
+      // Log a warning.
+      @warn 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+
+    // If upper breakpoint is invalid.
+    @if (map-has-key($grid-breakpoints, $upper) == false) {
+
+      // Log a warning.
+      @warn 'Your upper breakpoint was invalid: #{$upper}.';
+    }
+  }
+}
+// This file contains mixins - helper functions which let us quickly write or execute repetitive code.
+// Think of these like functions that we pass arguments to and get output in return
+
+// Add a mixin for transitions
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+// Loop through supplied font size array and generate responsive font sizes,
+// Based on https://www.smashingmagazine.com/2015/06/responsive-typography-with-sass-maps/
+@mixin font-size( $fs-map, $fs-breakpoints : $grid-breakpoints ) {
+
+    // Loop over our breakpoints and check the font size is in the mappings
+    @each $fs-breakpoint, $fs-font-size in $fs-map {
+        // If the breakpoint is null, just return the base font size as we haven't
+        // hit a recognised breakpoint yet
+        @if $fs-breakpoint == null {
+            font-size: $fs-font-size;
+        }
+        // Otherwise lets check the breakpoints and font size mappings match up
+        @else {
+            // If $fs-font-size is a key that exists in
+            // $fs-breakpoints, use the value
+            @if map-has-key( $fs-breakpoints, $fs-breakpoint ) {
+                // Get the breakpoint value that matches the mapping
+                $fs-breakpoint: map-get( $fs-breakpoints, $fs-breakpoint );
+            }
+
+            // Create a media query that maps the right font size to the right breakpoint
+            @media screen and (min-width: $fs-breakpoint) {
+                font-size: $fs-font-size;
+            }
+        }
+    }
+}
+
+// Box shadow mixin
+@mixin box-shadow( $top, $left, $blur, $colour, $inset: false ) {
+    @if $inset {
+        -webkit-box-shadow: inset $top $left $blur $colour;
+        -moz-box-shadow: inset $top $left $blur $colour;
+        box-shadow: inset $top $left $blur $colour;
+    } @else {
+        -webkit-box-shadow: $top $left $blur $colour;
+        -moz-box-shadow: $top $left $blur $colour;
+        box-shadow: $top $left $blur $colour;
+    }
+}
+
+// Hover underline mixin to save you having to repeat the CSS rule!
+@mixin hvrUnderline( $colour, $time, $direction: right, $pseudo: after ) {
+    position: relative;
+
+    // Initialise pseudo element
+    &:#{$pseudo} {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        height: 2px;
+        width: 0;
+        background: $colour;
+
+        @include transition($time all);
+    }
+
+    // Override any default colour hoverstates
+    &:hover {
+        color: $colour;
+
+        &:#{$pseudo} {width: 100%;}
+    }
+
+    // Change direction of pseudo on hover dependant on declared direction
+    @if $direction == "right" {
+        &:#{$pseudo} {
+            right: 100%;
+            left: 0;
+        }
+        &:hover {
+            &:#{$pseudo} {right: 0;}
+        }
+    } @elseif $direction == "left" {
+        &:#{$pseudo} {
+            left: 100%;
+            right: 0;
+        }
+        &:hover {
+            &:#{$pseudo} {left: 0;}
+        }
+    } @elseif $direction == "centre" {
+        &:#{$pseudo} {
+            left: 50%;
+            right: 50%;
+        }
+        &:hover {
+            &:#{$pseudo} {
+                left: 0;
+                right: 0;
+            }
+        }
+    }
+}
+
+// Default spacing mixin, also defines padded version.
+@mixin default-spacing( $class, $spacing: 'margin', $map: null ) {
+
+    // Check is a custom map is passed first tp then create spacing from mapping
+    @if type-of( $map ) == map {
+
+        @each $breakpoint, $space in $map {
+
+            @if $breakpoint == null {
+                @if $spacing == 'margin' {
+                    margin: $space 0;
+
+                    &.#{$class}--padded {
+                        margin: 0;
+                        padding: $space 0;
+                    }
+
+                } @elseif $spacing == 'padding' {
+                    padding: $space 0;
+                }
+            }
+
+            @if map-has-key( $grid-breakpoints, $breakpoint ) {
+
+                @include media-breakpoint-up( $breakpoint ) {
+                    @if $spacing == 'margin' {
+                        margin: $space 0;
+
+                        &.#{$class}--padded {
+                            margin: 0;
+                            padding: $space 0;
+                        }
+
+                    } @elseif $spacing == 'padding' {
+                        margin: 0;
+                        padding: $space 0;
+                    }
+                }
+            }
+        }
+
+    // Else use default spacing set for either marging or padding
+    } @elseif $spacing == 'margin' {
+        @each $breakpoint, $space in $default-margin-spacing {
+
+            @if $breakpoint == null {
+                margin: $space 0;
+
+                &.#{$class}--padded {
+                    margin: 0;
+                    padding: $space 0;
+                }
+            }
+
+            @if map-has-key( $grid-breakpoints, $breakpoint ) {
+                @include media-breakpoint-up( $breakpoint ) {
+                    margin: $space 0;
+
+                    &.#{$class}--padded {
+                        margin: 0;
+                        padding: $space 0;
+                    }
+                }
+            }
+        }
+    // Creates spacing using padding instead
+    } @elseif $spacing == 'padding' {
+        @each $breakpoint, $space in $default-margin-spacing {
+
+            @if $breakpoint == null {
+                padding: $space 0;
+            }
+
+            @if map-has-key( $grid-breakpoints, $breakpoint ) {
+                @include media-breakpoint-up( $breakpoint ) {
+                    margin: 0;
+                    padding: $space 0;
+                }
+            }
+        }
+    }
+}
+
+@mixin block-background-color( $block_name ) {
+
+    .#{$block_name}--primary {
+        background-color: $primary-color;
+    }
+
+    .#{$block_name}--secondary {
+        background-color: $secondary-color;
+    }
+
+    .#{$block_name}--tertiary {
+        background-color: $tertiary-color;
+    }
+
+    .#{$block_name}--grey {
+        background-color: $gray-100;
+    }
+}

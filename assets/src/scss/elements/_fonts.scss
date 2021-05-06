@@ -1,0 +1,74 @@
+// Set the font family for the body copy
+body,
+.wp-block {
+    font-family: $font-family-base;
+}
+
+// Add general rules for all heading tags and Bootstrap classes
+// across the project
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: $heading-font;
+
+    // If content appears after a heading tag, assume this generic spacing
+    + .content {
+        margin-top: 16px;
+    }
+
+    // If larger content is used, assume greater spacing will be necessary
+    + .content--lg {
+        margin-top: 26px;
+    }
+}
+
+// Bespoke heading class for extra large headings outside of h1-h6
+.uber {
+    @include font-size($uber-font-sizes);
+}
+
+// Set the responsive font sizes for the H1 tag
+h1, .h1 {
+    @include font-size($h1-font-sizes);
+}
+
+// Set the responsive font sizes for the H2 tag
+h2, .h2 {
+    @include font-size($h2-font-sizes);
+}
+
+// Set the responsive font sizes for the H3 tag
+h3, .h3 {
+    @include font-size($h3-font-sizes);
+}
+
+// Set the responsive font sizes for the H4 tag
+h4, .h4 {
+    @include font-size($h4-font-sizes);
+}
+
+// Set the responsive font sizes for the H5 tag
+h5, .h5 {
+    @include font-size($h5-font-sizes);
+}
+
+// Set the responsive font sizes for the H6 tag
+h6, .h6 {
+    @include font-size($h6-font-sizes);
+}
+
+// Responsive code
+@include above(md) {
+
+    // Increase the spacing generically from tablet portrait up
+    h1, h2, h3, h4, h5, h6,
+    .h1, .h2, .h3, .h4, .h5, .h6 {
+
+        + .content {
+            margin-top: 20px;
+        }
+
+        + .content--lg {
+            margin-top: 30px;
+        }
+    }
+}

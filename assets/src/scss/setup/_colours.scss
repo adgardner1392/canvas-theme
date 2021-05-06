@@ -1,0 +1,18 @@
+// Set our primary color
+$primary-color: #01033C;
+// Set our secondary color
+$secondary-color: #4ADEDE;
+// Add a new variable to the variable mappings for the tertiary color
+$tertiary-color: #EBF4FF;
+// Add a new variable to the variable mappings for the body copy color
+$body-font-color: #3F3B3B;
+
+// Fallback for white
+$white: #FFFFFF;
+$black: #000000;
+$red: #ff0000;
+
+// Set the default link color
+$link-color: $secondary-color;
+// Set the default hover color
+$link-hover-color: $primary-color;

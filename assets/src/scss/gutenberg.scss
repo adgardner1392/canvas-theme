@@ -1,0 +1,56 @@
+// Wrap all of our styles inside of the editor DIV to ensure that we don't
+// Override CMS display styles, and to make our code more specific than
+// default editor block styles
+div.editor-styles-wrapper {
+
+    // Import our variables
+    @import "/setup/*.scss";
+
+    // Import our utilities
+    @import "utilities/*.scss";
+
+    // Import the element styles, e.g. buttons or post cards
+    @import "/elements/**/*.scss";
+
+    // Import our block styles
+    @import "../../../templates/blocks/**/*.scss";
+
+    // Import any general theme rules not specific to an area of the project
+    @import "theme/*.scss";
+
+    // Import our component overrides - styles set to override the elements/*.scss files
+    @import "component-overrides/*.scss";
+
+    // Import block overrides, again to override any external block styles pulled into this project
+    @import "block-overrides/*.scss";
+
+    div[class^="hero-image-"] {
+        max-height: 800px;
+
+        .container {
+            height: auto;
+
+            &:before,
+            &:after {
+                height: auto;
+            }
+        }
+    }
+
+}
+
+// Post title width
+.editor-post-title__block.wp-block {
+	max-width: 1200px;
+}
+
+// Main column width
+.wp-block {
+    max-width: 1200px;
+}
+
+// Wide and Full column width
+.wp-block[data-align="wide"],
+.wp-block[data-align="full"] {
+	max-width: none;
+}

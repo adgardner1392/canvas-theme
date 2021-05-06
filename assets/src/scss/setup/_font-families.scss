@@ -1,0 +1,29 @@
+$font-families: (
+    'Gibson-Bold': 'Gibson-Bold',
+    'Gibson-Regular': 'Gibson-Regular',
+    'InputMono-Bold': 'InputMono-Bold',
+    'InputMono-Regular': 'InputMono-Regular',
+);
+
+/**
+* Load defined custom fonts from folder
+*/
+@each $key, $val in $font-families {
+    @font-face {
+        font-family: #{$key};
+        src: url('../fonts/#{$val}.eot');
+        src: url('../fonts/#{$val}.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/#{$val}.woff') format('woff'),
+        url('../fonts/#{$val}.ttf') format('truetype'),
+        url('../fonts/#{$val}.svg#sansationregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+}
+
+
+// Set our base fonts
+$heading-font: 'Gibson-Bold', sans-serif;
+$heading-font-regular: 'Gibson-Regular', sans-serif;
+$font-family-base: 'Roboto', sans-serif;
+$additional-font:  'InputMono-Regular', sans-serif;

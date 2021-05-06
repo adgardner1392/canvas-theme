@@ -1,0 +1,210 @@
+// Main header styles
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    max-width: 100%;
+    background-color: transparent;
+    z-index: 5;
+}
+
+// Logged in menu offset
+.admin-bar .header {
+    top: 46px;
+}
+
+// Container within the header
+.header__container {
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+// Row alignment for the logo and navigational menu
+.header__row {
+    align-items: center;
+    font-size: 0;
+}
+
+// Header column
+.header__col {}
+
+// Left header column
+.header__col--left {}
+
+// Right column
+.header__col--right {
+    position: static;
+    text-align: right;
+}
+
+// Anchor tag for the logo within the header
+.header__logo-link {
+    display: inline-block;
+
+    &:hover .header__logo {
+        opacity: 0.8;
+    }
+}
+
+// Main website logo within the header
+.header__logo {
+    @include transition(300ms all);
+}
+
+// Navigation menu
+.header__navigation {
+    display: none;
+    vertical-align: middle;
+}
+
+// Navigation ul
+.header__menu {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    justify-content: space-between;
+}
+
+// Navigation immediate (first level) list items
+.header__menu > .header__item {
+    margin-left: 24px;
+
+    // Remove maring left from first li
+    &:first-child {
+        margin-left: 0;
+    }
+
+    // If this is the current page, change the anchor link to indicate this
+    &.current-menu-item,
+    &.current-menu-ancestor {
+
+        > .header__link {
+            color: $primary-color;
+        }
+    }
+}
+
+// Firefox requirement for hidden list items
+.header__item {
+    list-style-type: none;
+}
+
+// Modifiers for CMS added classes to allow for certain nav items to be selected
+// when a user is on a specific page, e.g. Single blog article shows selected
+// state for the blog nav item even though they're not programmatically related,
+// in reality, they are
+.single-post .header__item--blog > .header__link {
+    color: $primary-color;
+}
+
+// Main anchor links within the header menu
+.header__link {
+    position: relative;
+    display: inline-block;
+    font-family: $heading-font;
+    color: $white;
+    text-decoration: none;
+    padding: 20px;
+    text-transform: uppercase;
+    @include font-size( $content-font-size-md );
+    @include transition(300ms all);
+    @include hvrUnderline( $secondary-color, 300ms, 'centre' );
+
+    // Link hover state
+    &:hover {
+        color: $secondary-color;
+    }
+
+    // Optional modifier for anchor links with no href
+    &:not([href]):not([tabindex]) {
+        color: $secondary-color;
+
+        &:after {
+            content: none;
+        }
+
+        &:hover {
+            color: $primary-color;
+        }
+    }
+}
+
+
+//Button
+.menu-item--btn {
+    .header__link {
+        background-color: $white;
+        color: $primary-color;
+        @include hvrUnderline( 0, 0, 0);
+        border-radius: 30px;
+        min-width: 150px;
+        text-align: center;
+
+        &:hover {
+            background-color: $secondary-color;
+            color: $white;
+        }
+    }
+}
+
+// Mobile menu anchor link
+.header__menu-link {
+    display: inline-block;
+    color: $secondary-color;
+    @include transition(300ms all);
+    vertical-align: middle;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+// Mobile menu icon
+.header__bars {
+    max-width: 26px;
+    height: 26px;
+    color: inherit;
+}
+
+// Responsive code
+@include above(md)
+{
+    .header__navigation {
+        display: inline-block;
+    }
+
+    .header__menu-link {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 782px)
+{
+    .admin-bar .header {
+        top: 32px;
+    }
+}
+
+@include above(lg)
+{
+
+    .header__link {
+        font-size: 20px;
+    }
+
+    .header__menu > .header__item {
+        margin-left: 30px;
+    }
+}
+
+@include above(xl) {
+
+    .header__menu > .header__item {
+        margin-left: 40px;
+    }
+}

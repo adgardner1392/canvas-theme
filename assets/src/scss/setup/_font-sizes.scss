@@ -1,0 +1,101 @@
+// Heading tag and class font sizes, from default (above XL breakpoint ) up through the responsive
+// breakpoints. This is fired through a loop in _mixins.scss to generate the
+// responsive rules.
+
+// Uber font size in Sketch
+$uber-font-sizes: (
+    null: 48px,
+    xs: 60px,
+    sm: 72px,
+    lg: 90px,
+    xl: 100px,
+);
+
+// Hero font size in Sketch
+$h1-font-sizes: (
+    null: 34px,
+    xs: 34px,
+    sm: 48px,
+    md: 58px,
+    lg: 64px,
+    xl: 72px,
+);
+
+// Headline-1 font size in Sketch
+$h2-font-sizes: (
+    null: 26px,
+    xs: 26px,
+    sm: 26px,
+    md: 36px,
+    lg: 46px,
+    xl: 60px,
+);
+
+// Headline-2 font size in Sketch
+$h3-font-sizes: (
+    null: 24px,
+    xs: 24px,
+    sm: 24px,
+    md: 30px,
+    lg: 36px,
+    xl: 40px,
+);
+
+// Headline-3 font size in Sketch
+$h4-font-sizes: (
+    null: 20px,
+    xs: 20px,
+    sm: 20px,
+    md: 24px,
+    lg: 28px,
+    xl: 30px,
+);
+
+// Headline-4 font size in Sketch
+$h5-font-sizes: (
+    null: 18px,
+    xs: 18px,
+    sm: 18px,
+    md: 20px,
+    lg: 22px,
+    xl: 24px,
+);
+
+// Headline-5 font size in Sketch
+$h6-font-sizes: (
+    null: 16px,
+    xs: 16px,
+    sm: 16px,
+    md: 16px,
+    lg: 18px,
+    xl: 20px,
+);
+
+// Content options
+
+$content-font-size-sm: (
+    null: 12px,
+    xs: 12px,
+    md: 14px,
+);
+
+$content-font-size-md: (
+    null: 16px,
+    xs: 16px,
+    md: 18px,
+);
+
+$content-font-size-lg: (
+    null: 18px,
+    xs: 18px,
+    md: 20px,
+);
+
+$content-font-size: (
+    null: 14px,
+    xs: 14px,
+    md: 16px,
+);
+
+$content-heading-margin: 0 0 30px;
+$content-heading-size: $h6-font-sizes;

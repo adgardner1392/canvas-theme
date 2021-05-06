@@ -1,0 +1,236 @@
+// Mobile menu element
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -101%;
+    bottom: 0;
+    max-width: 100%;
+    width: 100%;
+    padding-bottom: 40px;
+    background-color: $tertiary-color;
+    box-shadow: 0 2px 30px 0 rgba(0,0,0,0.15);
+    z-index: 5;
+    @include transition(500ms all ease-in-out);
+
+    &.is-active {
+        right: 0;
+        @include transition(500ms all ease-in-out);
+    }
+}
+
+// Mobile menu close anchor
+.mobile-menu__close {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    display: inline-block;
+    color: $red;
+    transform: translateY(-50%);
+    z-index: 2;
+    @include transition(300ms all);
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+// Close icon and label alignment
+.mobile-menu__label,
+.mobile-menu__icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+// Close label
+.mobile-menu__label {
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+// Close icon
+.mobile-menu__icon {
+    max-width: 20px;
+    height: 20px;
+}
+
+// Container around menu list
+.mobile-menu__container {
+    display: inline-block;
+    max-height: 100%;
+    width: 100%;
+    overflow: scroll;
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+// Logo area wrapper
+.mobile-menu__logo-wrap {
+    position: relative;
+    padding: 20px 30px;
+    background-color: $primary-color;
+}
+
+// Anchor link around logo
+.mobile-menu__logo-link {
+    display: inline-block;
+}
+
+// Logo within menu
+.mobile-menu__logo {}
+
+// Menu and submenu styles
+.mobile-menu__menu,
+.mobile-menu__submenu {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+// Main menu styles
+.mobile-menu__menu {
+    padding: 20px 30px 60px;
+}
+
+// List item styles
+.mobile-menu__item {
+    font-family: $heading-font-regular;
+    position: relative;
+    margin: 0;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Styles to apply only to top level list items, not sub-menu's
+.mobile-menu__menu > .mobile-menu__item {
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+    &:first-child {
+        border-top: 0;
+    }
+}
+
+// Submenu styles, hidden/collapsed by default
+.mobile-menu__submenu {
+    height: 0;
+    margin: 0;
+    padding: 0 0 0 16px;
+    opacity: 0;
+    visibility: hidden;
+
+    // Sub-menu list item
+    .mobile-menu__item {
+        margin-bottom: 14px;
+    }
+
+    // Sub-menu anchor links
+    .mobile-menu__link {
+        font-size: 14px;
+        color: rgba(255,255,255,0.8);
+    }
+}
+
+// Add arrow to all list items that have children
+.menu-item-has-children.mobile-menu__item {
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 22px;
+        right: 3px;
+        border: solid;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 4px;
+        transform: rotate(45deg);
+        @include transition(300ms all);
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+// Styles for when the menu item with children has been clicked on
+.menu-item-has-children.mobile-menu__item--active {
+
+    // Rotate arrow
+    &:after {
+        transform: rotate(-135deg);
+    }
+
+    // Show submenu on click of parent list item
+    .mobile-menu__submenu {
+        height: auto;
+        margin: 20px 0;
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+// Main menu anchor link styles
+.mobile-menu__link {
+    position: relative;
+    font-size: 14px;
+    color: inherit;
+
+    &:after {
+        content: '';
+        position: absolute;
+        color: $secondary-color;
+        right: 50%;
+        bottom: -6px;
+        left: 50%;
+        width: 0;
+        border-bottom: 2px solid;
+        @include transition(300ms all);
+    }
+
+    &:hover {
+        color: $secondary-color;
+    }
+}
+
+// Responsive code
+@include above(sm) {
+    .mobile-menu {
+        max-width: 350px;
+    }
+
+    .mobile-menu__close {
+        right: 40px;
+    }
+
+    .mobile-menu__menu {
+        padding: 20px 40px 60px;
+    }
+
+    .mobile-menu__logo-wrap {
+        padding: 20px 40px;
+    }
+
+    .mobile-menu__link {
+        @include transition(300ms all);
+
+        &:hover {
+
+            &:after {
+                right: 0;
+                left: 0;
+                width: 100%;
+            }
+        }
+    }
+
+    .menu-item-has-children.mobile-menu__item:after {
+        padding: 5px;
+    }
+}
